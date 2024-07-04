@@ -6,7 +6,6 @@ if (typeof (SalesforceInteractions.mcis.FlickerDefender || {}).setPageMatchTimeo
 if (typeof (SalesforceInteractions.mcis.FlickerDefender || {}).setRedisplayTimeout === "function") {
   SalesforceInteractions.mcis.FlickerDefender.setRedisplayTimeout(1000);
 }
-
 // 로그인 상태 판단
 // const checkCookieExists = name => document.cookie.split(';').some(cookie => cookie.trim().startsWith(`${name}=`));
 // checkCookieExists('ArcId.USER_INFO.session') ? sessionStorage.setItem("logBoolean_c", true) : sessionStorage.setItem("logBoolean_c", false);
@@ -284,32 +283,6 @@ const dznoValue = document.cookie.includes('dz_no=') ? document.cookie.match(/(?
 //chosunhnb
 const loginStatus_cH = SalesforceInteractions.cashDom(".xans-layout-statelogon");
 
-// // newsDetail에서 동접자, PV 확인하기
-// if(SalesforceInteractions.cashDom("section.article-body").length > 0){
-//         // 뉴스기사 ID 확인
-//     const pathList = window.location.pathname.split('/');
-//     const articleId = pathList[pathList.length - 1] || pathList[pathList.length - 2]; // URL이 슬래시로 끝날 경우를 대비
-//     let paywallBg = document.querySelector('.paywall--bg'); // 로그인월 백그라운드
-//     fetch('https://cloudchartbeat-shnu6s7fea-du.a.run.app/v1/real-time/')
-//     .then((res) => res.json())
-//     .then((data) => {
-//         // api 내의 ARTICLEID가 현재 기사id인 항목 찾기
-//         const article = data.find(item => item.ARTICLEID === articleId);
-//         console.log(article); // 결과 출력
-//         console.log(article.CONCURRENT) // 동시접속자 수
-//         console.log(article.PAGEVIEW_A) // 당일(0시 ~ 현재) 누적접속자 수
-//         if(article && article.CONCURRENT > 500 && article.PAGEVIEW_A > 50000){
-//             console.log("사이트맵!!")
-//         } else {
-//             console.log("x")
-//         }
-//     })
-//     .catch((error) => {
-//         console.error('Error fetching data:', error);
-//     });
-// }
-
-
 // 로그인 상태 - chosunHnB
 if (loginStatus_cH.length === 1) {
   sessionStorage.setItem("log_cH", true);
@@ -505,11 +478,11 @@ if (allowedDomains.includes(domain)) {
             // { name: "recommendation_article4_main", selector: ".layout-main > .grid__container > section > article > div:nth-child(2) > section > div:nth-child(1) > div:nth-child(3) > .story-card-wrapper > .story-card" },
             // { name: "recommendation_article5_main", selector: ".layout-main > .grid__container > section > article > div:nth-child(2) > section > div:nth-child(3) > div:nth-child(5)" },
             // { name: "3차 교육 테스트 0625", selector: ".layout-main > .grid__container > section > article > div:nth-child(2) > section > div:nth-child(1) > div:nth-child(6)"},
-            { name: "[S10] ABtest_1", selector: "section[data-pb-fingerprint='c0fiilbraX4A2jO']" },
-            { name: "[S10] ABtest_2", selector: "div[data-pb-fingerprint='f0f5P60QG70JA2']" },
-            { name: "[S10] ABtest_3", selector: "div[data-pb-fingerprint='f0frDo5eqwth2sz']" },
-            { name: "[S7] Recommendation article", selector: "div[data-pb-fingerprint='f0fso3pnKVbt5C']" },
-            { name: "[S9] Tag based article", selector: "div[data-pb-fingerprint='f0fz5x6fpncKo1']" },
+            // { name : "[S10] ABtest_1", selector: "section[data-pb-fingerprint='c0fiilbraX4A2jO']" },
+            // { name : "[S10] ABtest_2", selector: "div[data-pb-fingerprint='f0f5P60QG70JA2']" },
+            // { name : "[S10] ABtest_3", selector: "div[data-pb-fingerprint='f0frDo5eqwth2sz']" },
+            // { name : "[S7] Recommendation article", selector: "div[data-pb-fingerprint='f0fso3pnKVbt5C']" },
+            // { name : "[S9] Tag based article", selector: "div[data-pb-fingerprint='f0fz5x6fpncKo1']" },
           ],
         },
         {
@@ -664,7 +637,7 @@ if (allowedDomains.includes(domain)) {
           ],
           contentZones: [
             { name: "related_article", selector: ".article-related-content" },
-            { name: "newsDetail LoginPopup", selector: "section.article-body" },
+            { name: "newsDetail LoginPopup", selector: "section.article-bodybody" },
 
           ],
         },
