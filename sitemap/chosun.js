@@ -1,4 +1,4 @@
-console.log("코드 적용 확인 시간 240702_18:29");
+console.log("코드 적용 확인 시간 240711_11:25");
 if (typeof (SalesforceInteractions.mcis.FlickerDefender || {}).setPageMatchTimeout === "function") {
   SalesforceInteractions.mcis.FlickerDefender.setPageMatchTimeout(500);
 }
@@ -26,8 +26,8 @@ if (typeof (SalesforceInteractions.mcis.FlickerDefender || {}).setRedisplayTimeo
 // const logSettime = setTimeout(()=> {
 const checkCookieExists = (name) => document.cookie.split(";").some((cookie) => cookie.trim().startsWith(`${name}=`));
 
-const cookie1Exists = checkCookieExists("ArcId.USER_INFO.session");
-const cookie2Exists = checkCookieExists("ArcId.USER_INFO");
+const cookie1Exists = checkCookieExists("ArcId.USER_INFO.session"); // 일반로그인
+const cookie2Exists = checkCookieExists("ArcId.USER_INFO"); // 자동로그인
 
 if (cookie1Exists || cookie2Exists) {
   sessionStorage.setItem("logBoolean_c", "Y");
@@ -35,6 +35,17 @@ if (cookie1Exists || cookie2Exists) {
   sessionStorage.setItem("logBoolean_c", "N");
 }
 console.log(`로그인 상태 - ${sessionStorage.getItem("logBoolean_c")}`);
+
+if (cookie1Exists) {
+  sessionStorage.setItem("normal_login", "Y")
+} else if (!cookie1Exists) {
+  sessionStorage.setItem("normal_login", "N")
+}
+if (cookie2Exists) {
+  sessionStorage.setItem("auto_login", "Y")
+} else if (!cookie2Exists) {
+  sessionStorage.setItem("auto_login", "N")
+}
 // SalesforceInteractions.sendEvent({
 //     user: { attributes: { logBoolean_c: sessionStorage.getItem("logBoolean_c") } },
 // });
@@ -120,6 +131,8 @@ const domain = window.location.hostname;
 const url = window.location.href;
 const allowedDomains = ["www.chosun.com", "chosunhnb.com", "www.chosunhnb.com", "m.chosunhnb.com"];
 const hnbDomains = ["chosunhnb.com", "www.chosunhnb.com", "m.chosunhnb.com"];
+const referrer = document.referrer;
+
 
 // 외부 유입 확인
 // const referCheck = () => {
@@ -142,6 +155,8 @@ const hnbDomains = ["chosunhnb.com", "www.chosunhnb.com", "m.chosunhnb.com"];
 //         }
 //     }
 // }
+
+
 
 const dotcomEmail = () => {
   const keyBytes = CryptoJS.enc.Utf8.parse("dkaghghkwhtjsdlf");
@@ -284,31 +299,34 @@ const dznoValue = document.cookie.includes('dz_no=') ? document.cookie.match(/(?
 //chosunhnb
 const loginStatus_cH = SalesforceInteractions.cashDom(".xans-layout-statelogon");
 
+
 // // newsDetail에서 동접자, PV 확인하기
-// if(SalesforceInteractions.cashDom("section.article-body").length > 0){
-//         // 뉴스기사 ID 확인
-//     const pathList = window.location.pathname.split('/');
-//     const articleId = pathList[pathList.length - 1] || pathList[pathList.length - 2]; // URL이 슬래시로 끝날 경우를 대비
-//     let paywallBg = document.querySelector('.paywall--bg'); // 로그인월 백그라운드
-//     fetch('https://cloudchartbeat-shnu6s7fea-du.a.run.app/v1/real-time/')
+// if (document.querySelector("section.article-body")) {
+// // 뉴스기사 ID 확인
+// const pathList = window.location.pathname.split('/');
+// const articleId = pathList[pathList.length - 1] || pathList[pathList.length - 2]; // URL이 슬래시로 끝날 경우를 대비
+// // let paywallBg = document.querySelector('.paywall--bg'); // 로그인월 백그라운드
+// fetch('https://cloudchartbeat-shnu6s7fea-du.a.run.app/v1/real-time/')
 //     .then((res) => res.json())
 //     .then((data) => {
 //         // api 내의 ARTICLEID가 현재 기사id인 항목 찾기
-//         const article = data.find(item => item.ARTICLEID === articleId);
-//         console.log(article); // 결과 출력
-//         console.log(article.CONCURRENT) // 동시접속자 수
-//         console.log(article.PAGEVIEW_A) // 당일(0시 ~ 현재) 누적접속자 수
-//         if(article && article.CONCURRENT > 500 && article.PAGEVIEW_A > 50000){
-//             console.log("사이트맵!!")
+//         console.log(data.slice(0, 30))
+//         const article = data.slice(0, 30).find(item => item.ARTICLEID === articleId);
+//         // console.log(article); // 결과 출력
+//         // console.log(article.CONCURRENT) // 동시접속자 수
+//         // console.log(article.PAGEVIEW_A) // 당일(0시 ~ 현재) 누적접속자 수
+//         if (article && article.CONCURRENT > 400 && article.PAGEVIEW_A > 50000) {
+//             sessionStorage.setItem("popular_article", "Y")
+//             console.log("popular_article")
 //         } else {
-//             console.log("x")
+//             sessionStorage.setItem("popular_article", "N")
+//             console.log("popular_article_X")
 //         }
 //     })
 //     .catch((error) => {
 //         console.error('Error fetching data:', error);
 //     });
 // }
-
 
 // 로그인 상태 - chosunHnB
 if (loginStatus_cH.length === 1) {
@@ -332,6 +350,7 @@ const mallCookie = (cookieName) => {
   return null;
 };
 
+
 // mall email 쿠키값 가져오기
 const mallEmail = mallCookie("biz_un");
 
@@ -343,10 +362,36 @@ if (mallEmail !== null) {
 
 const recentSearch_cH = SalesforceInteractions.cashDom("#keyword").val();
 
+
+
+
 if (allowedDomains.includes(domain)) {
   SalesforceInteractions.init({
     cookieDomain: domain,
   }).then(() => {
+    // SalesforceInteractions.DisplayUtil.pageElementLoaded(".footer", html).then((ele)=>{
+    setTimeout(() => {
+      if (SalesforceInteractions.cashDom("div.article-tags").length > 0) {
+        // const tagArray = [];
+        const tagArray = Array.from(document.querySelectorAll("div.article-tags > a > span"));
+        const arrResult = [];
+
+        SalesforceInteractions.cashDom("div.article-tags > a > span").each((index, data, arr) => {
+          arrResult.push(tagArray[index].innerText);
+        });
+        console.log(arrResult);
+
+        const tagItem = arrResult.join(',');
+        sessionStorage.setItem("tagItem", tagItem);
+
+
+      } else {
+        sessionStorage.setItem("tagf", null);
+      }
+    }, 2000);
+
+    // });
+
     //외부 유입 채널 확인
     // referCheck();
     // const category1Ko = SalesforceInteractions.cashDom(".breadcrumb a.text--black:nth-child(1)");
@@ -360,6 +405,10 @@ if (allowedDomains.includes(domain)) {
     } else {
       sessionStorage.setItem("seriesTag", null);
     }
+
+
+
+
     const cateOfCatePage = () => {
       // if (window.location.host === 'm.chosunhnb.com') {
       //     SalesforceInteractions.DisplayUtils.pageElementLoaded("#contents #titleArea", "html").then(() => {
@@ -382,6 +431,8 @@ if (allowedDomains.includes(domain)) {
     };
     console.log(`카테페이지 ${cateOfCatePage()}`);
 
+
+
     //접속 국가
     const getLocale = () => {
       const localeOrigin = navigator.language;
@@ -400,6 +451,9 @@ if (allowedDomains.includes(domain)) {
           if (window.location.hostname === "www.chosun.com") {
             if (dotcomEmail()) {
               actionEvent.user.identities.emailAddress = dotcomEmail();
+            }
+            if (referrer.includes("https://www.chosun.com/") === false) {
+              actionEvent.user.referrerURL = referrer
             }
             // dz_no - chosun
             if (dznoValue) {
@@ -431,6 +485,14 @@ if (allowedDomains.includes(domain)) {
             if (sessionStorage.getItem("logBoolean_c") !== null) {
               actionEvent.user.attributes.login_c = sessionStorage.getItem("logBoolean_c");
             }
+            // 일반로그인
+            if (sessionStorage.getItem("normal_login") !== null) {
+              actionEvent.user.attributes.normal_login = sessionStorage.getItem("normal_login");
+            }
+            // 자동로그인
+            if (sessionStorage.getItem("auto_login") !== null) {
+              actionEvent.user.attributes.auto_login = sessionStorage.getItem("auto_login");
+            }
             // 1500자 이상 여부 - chosun
             if (sessionStorage.getItem("moreThan1500") !== null) {
               actionEvent.user.attributes.moreThan1500 = sessionStorage.getItem("moreThan1500");
@@ -447,12 +509,19 @@ if (allowedDomains.includes(domain)) {
             if (sessionStorage.getItem("oldNews") !== null) {
               actionEvent.user.attributes.oldNews = sessionStorage.getItem("oldNews");
             }
+            // 인기 기사 (동접자 400이상, 당일 PV 5만 이상)
+            if (sessionStorage.getItem("popular_article") !== null) {
+              actionEvent.user.attributes.popular_article = sessionStorage.getItem("popular_article")
+            }
             // 아웃링크로 들어온 고객 - chosun
             // if (sessionStorage.getItem("externalInflow") !== null) {
             //     actionEvent.user.attributes.externalInflow = sessionStorage.getItem("externalInflow")
             // }
             if (sessionStorage.getItem("seriesTag") !== null) {
               actionEvent.user.attributes.seriesTag = sessionStorage.getItem("seriesTag");
+            }
+            if (sessionStorage.getItem("tagItem") !== null) {
+              actionEvent.user.attributes.tagItem = sessionStorage.getItem("tagItem");
             }
             if (series.length > 0) {
               actionEvent.user.attributes.series = "연재물";
@@ -506,9 +575,10 @@ if (allowedDomains.includes(domain)) {
             // { name: "recommendation_article5_main", selector: ".layout-main > .grid__container > section > article > div:nth-child(2) > section > div:nth-child(3) > div:nth-child(5)" },
             // { name: "3차 교육 테스트 0625", selector: ".layout-main > .grid__container > section > article > div:nth-child(2) > section > div:nth-child(1) > div:nth-child(6)"},
             { name: "[S10] ABtest_1", selector: "section[data-pb-fingerprint='c0fiilbraX4A2jO']" },
-            { name: "[S10] ABtest_2", selector: "div[data-pb-fingerprint='f0f5P60QG70JA2']" },
-            { name: "[S10] ABtest_3", selector: "div[data-pb-fingerprint='f0frDo5eqwth2sz']" },
-            { name: "[S7] Recommendation article", selector: "div[data-pb-fingerprint='f0fso3pnKVbt5C']" },
+            { name: "[S10] ABtest_2", selector: "section[data-pb-fingerprint='c0f1RQsU1PTFgf'] > div:nth-child(3) > div[data-pb-type='story-card/default']:first-child" },
+            { name: "[S10] ABtest_3", selector: "section[data-pb-fingerprint='c0f1RQsU1PTFgf'] > div:nth-child(1) > div:nth-child(3)" },
+            // { name : "[S7] Recommendation article", selector: "div[data-pb-fingerprint='f0fso3pnKVbt5C']" },
+            { name: "[S7] Recommendation_article", selector: "section[data-pb-fingerprint='c0f1RQsU1PTFgf'] > div:nth-child(3) > div[data-pb-type='story-card/default']:nth-last-child(1)" },
             { name: "[S9] Tag based article", selector: "div[data-pb-fingerprint='f0fz5x6fpncKo1']" },
           ],
         },
@@ -538,6 +608,10 @@ if (allowedDomains.includes(domain)) {
           //         }
           //     }, 1500)
           // },
+          //   onActionEvent: (actionEvent) => {
+          //     actionEvent.user.attributes.hashTag = "test";
+          //     return actionEvent;
+          //   },
           interaction: {
             name: SalesforceInteractions.CatalogObjectInteractionName.ViewCatalogObject,
             catalogObject: {
@@ -611,6 +685,68 @@ if (allowedDomains.includes(domain)) {
             },
           },
           listeners: [
+            SalesforceInteractions.DisplayUtils.pageElementLoaded(".article-header__headline").then((e) => {
+              // const referrer = document.referrer;
+              // console.log("loaded = " + e);
+              // console.log("referrer = " + referrer);
+              //     if (referrer.includes("https://www.chosun.com/") === false) {
+              //     console.log("아웃링크 유입");
+              //     SalesforceInteractions.sendEvent({
+              //         interaction:{
+              //             name:"Referrer Check"
+              //         },
+              //         user:{
+              //             attributes:{
+              //                 referrerURL: referrer
+              //             }
+              //         }
+              //     })
+              // } else if (referrer.includes("https://www.chosun.com/") === true) {
+              //     console.log("내부 유입");
+              //     SalesforceInteractions.sendEvent({
+              //         interaction: {
+              //             name: "externalInflow No"
+              //         }
+              //     })
+              // }
+              // SalesforceInteractions.listener("onload", ".tag-item", () =>{
+              // 아웃링크 유입
+              // if (referrer.includes("https://www.chosun.com/") === false) {
+              //     console.log("아웃링크 유입");
+              //     SalesforceInteractions.sendEvent({
+              //         interaction:{
+              //             name:"Referrer Check"
+              //         },
+              //         user:{
+              //             attributes:{
+              //                 referrerURL: referrer
+              //             }
+              //         }
+              //     })
+              // } else if (referrer.includes("https://www.chosun.com/") === true) {
+              //     console.log("내부 유입");
+              //     SalesforceInteractions.sendEvent({
+              //         interaction: {
+              //             name: "externalInflow No"
+              //         }
+              //     })
+              // }
+              // }),
+            }),
+            // SalesforceInteractions.listener("onload", ".tag-item", () =>{
+
+            //     const hashTag = SalesforceInteractions.cashDom(".tag-item").text();
+            //     SalesforceInteractions.sendEvent({
+            //         interaction:{
+            //             name:"hashTag"
+            //         },
+            //         user:{
+            //             attributes:{
+            //                 tagItem: hashTag
+            //             }
+            //         }
+            //     })
+            // }),
             // 최근 북마크한 기사 - chosun PC
             SalesforceInteractions.listener("click", "#bookmark-v", () => {
               console.log("북마크클릭");
