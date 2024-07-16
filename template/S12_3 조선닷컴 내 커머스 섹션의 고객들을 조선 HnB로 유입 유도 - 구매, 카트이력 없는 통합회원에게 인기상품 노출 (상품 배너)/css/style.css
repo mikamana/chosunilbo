@@ -444,6 +444,14 @@
   #evg-eventBanner .prd .price_box .current_price_box {
       font-size: 16px;
   }
+  @media (prefers-color-scheme: dark) {
+      #evg-eventBanner .recommended_prd_list .prd .price_box .current_price_box .price {
+          color: #ffffff;
+      }
+      #evg-eventBanner .recommended_prd_list .prd .prd_name {
+          color: #ffffff;
+      }
+  }
 }
 @media screen and (min-width: 1024px) and (max-width: 1280px) {
   #evg-eventBanner .prd a .prd_img_box {
@@ -461,7 +469,6 @@
       object-fit: cover;
   }
 }
-
 @media (prefers-color-scheme: dark) {
   #evg-eventBanner .recommended_prd_list .prd .price_box .current_price_box .price {
       color: #ffffff;

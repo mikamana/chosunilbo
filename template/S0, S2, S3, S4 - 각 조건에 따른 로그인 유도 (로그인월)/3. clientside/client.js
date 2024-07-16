@@ -1,23 +1,17 @@
 (function () {
 
   function apply(context, template) {
-    console.log("testtttt");
-    document.querySelector('.login-popup-layer').style.display = 'flex';
-    // if(document.querySelectorAll(".paywall--bg").length === 0){
-    //     document.body.innerHTML += "<div class='paywall--bg'></div>"
-    // }
-    // if(document.querySelector('.login-popup-layer').style.display = 'flex'){
-    //     document.body.style.overflow = 'hidden';
-    // } else {
-    //     document.body.style.overflow = '';
-    // }
+    if (SalesforceInteractions.cashDom('#paywallCont').length > 0) return;
+    setTimeout(() => {
+      document.querySelector(".login-popup-layer").style.display = "flex";
+      document.body.classList.add("stop-scrolling");
+      SalesforceInteractions.cashDom(".layout-main > section").html(template());
+    }, 10)
 
   }
 
-
   function reset(context, template) {
 
-    /** Remove the template from the DOM to reset the template. */
     Evergage.cashDom("#evg-new-template").remove();
   }
 

@@ -1,0 +1,23 @@
+<div class="{{infobarClass}} {{style.className}}" id="popup_wrap" data-evg-campaign-id="{{campaign}}"
+  data-evg-experience-id="{{experience}}" data-evg-user-group="{{userGroup}}"
+  aria-label="Infobar{{#if messageText}} - {{messageText}}{{/if}}" role="alert">
+  <div class="popup">
+    <div class="top">
+      <div class="txt_box">
+        <p class="txt1">조선몰 가입시</p>
+        <p class="txt2">적립금 <span>2만원</span> 지급</p>
+        <p class="txt3">적립금은 판매가의 5%까지 사용 가능합니다.</p>
+      </div>
+      <img src="https://image.event2.chosun.com/lib/fe2b117473640479751c79/m/1/fa9e865b-9a7c-4fff-b99a-a342f2a149fe.png"
+        class="coupon_img" />
+      <button type="button" class="benefit_btn"
+        onclick="window.open('https://membership.chosun.com/login/oauth/arc_landing_at.jsp?target_url=https://www.chosunhnb.com/member/join.html','_blank','fullscreen'); return false;">혜택
+        받으러 가기</button>
+    </div>
+    <div class="bot">
+      <button class="today_close_btn" data-evg-dismissal>오늘 하루 보지 않기</button>
+      <button class="close_btn">닫기</button>
+    </div>
+  </div>
+  <div class="bg_layer"></div>
+</div>

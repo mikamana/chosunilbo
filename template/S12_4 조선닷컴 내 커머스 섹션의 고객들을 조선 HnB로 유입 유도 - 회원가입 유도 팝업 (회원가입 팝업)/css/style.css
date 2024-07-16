@@ -1,0 +1,187 @@
+.scrollLock {
+  overflow: hidden;
+}
+
+#popup_wrap {
+  position: fixed;
+  z-index: 9997;
+  left: 0;
+  top: 0;
+
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+  /* text-align: center; */
+  /* border-radius: 8px; */
+  /* overflow: hidden; */
+  /* background-color: blue; */
+}
+#popup_wrap .popup {
+  z-index: 9999;
+  width: 480px;
+  height: 456px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  overflow: hidden;
+}
+#popup_wrap .popup .top {
+  width: 100%;
+  height: 408px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url("https://image.event2.chosun.com/lib/fe2b117473640479751c79/m/1/6d3da675-2daa-48e7-93a6-e634741056dd.png"),
+      linear-gradient(rgba(255, 255, 255, 1), rgba(237, 238, 250, 1));
+  background-size: 480px auto;
+  background-repeat: no-repeat;
+}
+#popup_wrap .popup .top .txt_box {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+#popup_wrap .popup .top .txt_box .txt1 {
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: -0.5%;
+  font-weight: 500;
+  color: rgba(34, 34, 34, 1);
+  margin: 0;
+}
+#popup_wrap .popup .top .txt_box .txt2 {
+  font-size: 38px;
+  line-height: 54px;
+  letter-spacing: -0.5%;
+  font-weight: 700;
+  color: rgba(34, 34, 34, 1);
+  margin-top: 2px;
+  margin-bottom: 0;
+}
+#popup_wrap .popup .top .txt_box .txt3 {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: rgba(112, 112, 112, 1);
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+#popup_wrap .popup .top .txt_box .txt2 span {
+  color: rgba(18, 108, 205, 1);
+}
+#popup_wrap .popup .top .coupon_img {
+  width: 216px;
+  margin-bottom: 32px;
+}
+#popup_wrap .popup .top .benefit_btn {
+  width: 400px;
+  height: 56px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(18, 108, 205, 1);
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.5%;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 1);
+  cursor: pointer;
+}
+#popup_wrap .popup .bot {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 1);
+}
+#popup_wrap .popup .bot .today_close_btn {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  padding: 14px 20px;
+  letter-spacing: -0.5%;
+  cursor: pointer;
+  color: rgba(34, 34, 34, 1);
+}
+#popup_wrap .popup .bot .close_btn {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  padding: 14px 20px;
+  letter-spacing: -0.5%;
+  cursor: pointer;
+  color: rgba(34, 34, 34, 1);
+}
+#popup_wrap .bg_layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 9998;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 739px) {
+  /* #popup_wrap{
+
+  } */
+  #popup_wrap .popup {
+      width: 91.11vw;
+      height: 115.27vw;
+  }
+  #popup_wrap .popup .top {
+      background-size: 100% auto;
+      height: 101.94vw;
+  }
+  #popup_wrap .popup .top .txt_box {
+      margin-top: 11.11vw;
+      margin-bottom: 6.66vw;
+  }
+  #popup_wrap .popup .top .txt_box .txt1 {
+      font-size: 5.55vw;
+      line-height: 8.33vw;
+  }
+  #popup_wrap .popup .top .txt_box .txt2 {
+      font-size: 8.55vw;
+      line-height: 10vw;
+  }
+  #popup_wrap .popup .top .coupon_img {
+      width: 51.38vw;
+      margin-bottom: 6.66vw;
+  }
+  #popup_wrap .popup .top .benefit_btn {
+      width: 80vw;
+      height: 15.55vw;
+      font-size: 4.44vw;
+      line-height: 6.66vw;
+  }
+  #popup_wrap .popup .bot {
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+      height: auto;
+  }
+  #popup_wrap .popup .bot .today_close_btn {
+      font-size: 3.88vw;
+      line-height: 5.55vw;
+      padding: 3.88vw 5.55vw;
+  }
+  #popup_wrap .popup .bot .close_btn {
+      font-size: 3.88vw;
+      line-height: 5.55vw;
+      padding: 3.88vw 5.55vw;
+  }
+}

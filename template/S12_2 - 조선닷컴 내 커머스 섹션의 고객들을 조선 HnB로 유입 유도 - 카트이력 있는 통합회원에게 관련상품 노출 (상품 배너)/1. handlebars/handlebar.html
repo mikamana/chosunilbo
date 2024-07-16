@@ -1,169 +1,91 @@
-<!-- PC -->
-<section
-  class="{{infobarClass}} {{style.className}} story-card-wrapper story-card-wrapper--basic-nth story-card-wrapper--art-above-head | hide-deck hide-liveblogging box--hidden-sm box-hidden-md-only false story-card--lg flex-chain | flex"
-  id="evg-edu-sample" data-evg-campaign-id="{{campaign}}" data-evg-experience-id="{{experience}}"
-  data-evg-user-group="{{userGroup}}" aria-label="Infobar{{#if messageText}} - {{messageText}}{{/if}}" role="alert">
-  <div class="flex-chain__column flex-chain__column-single | grid__col--sm-12 grid__col--md-12 grid__col--lg-12">
-    <div data-pb-fingerprint="f0fPdtVLXxFu4n" data-pb-type="story-card/default"
-      class="story-card-container | width--100 ">
-      <div
-        class="story-card-wrapper story-card-wrapper--basic-last story-card-wrapper--art-right-of-deck | show-deck hide-liveblogging box--hidden-sm box-hidden-md-only false story-card--lg">
-        <div class="story-card story-card--art-right-of-deck |  flex flex--wrap">
-          <div class="story-card-block story-card-top  | grid__col--sm-12 grid__col--md-12 grid__col--lg-12">
-            <div class="story-card-component | text--overflow-ellipsis text--center box--pad-bottom-sm"><a
-                class="story-card__headline | box--margin-none text--black font--tertiary h2 text__link--color"
-                href={{articleUrl}}><span>{{articleTitle}}
-                </span></a></div>
+<div class="{{infobarClass}} {{style.className}}" id="evg-eventBanner" data-evg-campaign-id="{{campaign}}"
+  data-evg-experience-id="{{experience}}" data-evg-user-group="{{userGroup}}"
+  aria-label="Infobar{{#if messageText}} - {{messageText}}{{/if}}" role="alert">
+  <div class="layout_line"></div>
+  <div class="prd_wrap">
+    <div class="recommended_prd_top">
+      <div class="content_title">
+        <img
+          src="https://image.event2.chosun.com/lib/fe2b117473640479751c79/m/1/4a6caeea-0e1f-4177-ad50-e960d75a1d99.png"
+          alt="조선몰에서 엄선한 추천 아이템" class="content_title_pc" />
+        <img
+          src="https://image.event2.chosun.com/lib/fe2b117473640479751c79/m/1/607372ed-6db3-4c7b-b65e-23bb55f0ef94.png"
+          alt="조선몰 추천 아이템" class="content_title_mobile" />
+      </div>
+      <a href="https://chosunhnb.com/" target="_blank">
+        <div class="text_box">
+          <p class="full_view">전체보기</p>
+          <img
+            src="https://image.event2.chosun.com/lib/fe2b117473640479751c79/m/1/9a4910e4-0cd8-46f0-aaf0-b1a75ab6e5c9.png"
+            alt=">" />
+          <!-- <p class="symbol">&gt;</p> -->
+        </div>
+        <img
+          src="https://image.event2.chosun.com/lib/fe2b117473640479751c79/m/1/4d07107d-eaa4-4eeb-b879-b226c524d125.png"
+          alt="조선몰 바로가기 버튼" />
+      </a>
+    </div>
+    <div class="recommended_prd_list">
+      <div class="prd prd1">
+        <a href="https://chosunhnb.com/product/detail.html?product_no={{attributes.pno_c5.value}}" target="_blank">
+          <div class="prd_img_box">
+            <img src="{{attributes.detail_image_c5.value}}" class="prd_img" alt="상품 이미지" />
           </div>
-          <div class="story-card-block story-card-left | grid__col--sm-4 grid__col--md-4 grid__col--lg-4">
-            <div class="story-card-component | text--overflow-ellipsis box--pad-bottom-xs h4 text--left"><a
-                class="box--margin-none text--black font--secondary text--line-height-1.43 text__link--color box--display-block"
-                href={{articleUrl}}>
-                <div>{{articleSubTitle}}</div>
-              </a></div>
-            <div
-              class="story-card-component story-card__deck | text--grey-60 font--primary font--size-sm-14 font--size-md-14 text--line-height-1.43 text--overflow-ellipsis">
-              <span>{{articleContents}}</span>
+          <p class="prd_name">{{attributes.product_name_c5.value}}</p>
+          <div class="price_box">
+            <p class="retail_price">{{attributes.retail_price_c5.value}}</p>
+            <div class="current_price_box">
+              <p class="discount"></p>
+              <p class="price">{{attributes.price_c5.value}}</p>
             </div>
           </div>
-          <div
-            class="story-card-block story-card-right story-card-block--art | grid__col--sm-8 grid__col--md-8 grid__col--lg-8">
-            <div id="artwrapper" class="story-card-component story-card__art | box--position-relative">
-              <div class="image-wrapper | box--position-relative">
-                <figure class=" story-card__art-image | visual__image">
-                  <div class="width--100 box--margin-center">
-                    <div class="article-print-sty1 | box--position-relative width--100"
-                      style="padding-bottom: 56.1688%;">
-                      <div
-                        class="article-print-sty2 | width--100 height--100 box--position-absolute box--position-absolute-top box--position-absolute-left">
-                        <a class="" href={{articleUrl}} aria-label="Sample 4">
-                          <div class="lazyload-wrapper "><img src={{articleThumnail}} alt="Sample 4"
-                              class="box--display-block"></div>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </figure>
-              </div>
+        </a>
+      </div>
+      <div class="prd prd2">
+        <a href="https://chosunhnb.com/product/detail.html?product_no={{attributes.pno_c1.value}}" target="_blank">
+          <div class="prd_img_box">
+            <img src="{{attributes.detail_image_c1.value}}" class="prd_img" alt="상품 이미지" />
+          </div>
+          <p class="prd_name">{{attributes.product_name_c1.value}}</p>
+          <div class="price_box">
+            <p class="retail_price">{{attributes.retail_price_c1.value}}</p>
+            <div class="current_price_box">
+              <p class="discount"></p>
+              <p class="price">{{attributes.price_c1.value}}</p>
             </div>
           </div>
-        </div>
-        <div class="story-card__separator box--bg-undefined |">
-          <div
-            class="separator | box--border box--border-grey-20 box--border-xs box--border-horizontal box--border-horizontal-bottom">
+        </a>
+      </div>
+      <div class="prd prd3">
+        <a href="https://chosunhnb.com/product/detail.html?product_no={{attributes.pno_c2.value}}" target="_blank">
+          <div class="prd_img_box">
+            <img src="{{attributes.detail_image_c2.value}}" class="prd_img" alt="상품 이미지" />
           </div>
-        </div>
+          <p class="prd_name">{{attributes.product_name_c2.value}}</p>
+          <div class="price_box">
+            <p class="retail_price">{{attributes.retail_price_c2.value}}</p>
+            <div class="current_price_box">
+              <p class="discount"></p>
+              <p class="price">{{attributes.price_c2.value}}</p>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="prd prd4">
+        <a href="https://chosunhnb.com/product/detail.html?product_no={{attributes.pno_c3.value}}" target="_blank">
+          <div class="prd_img_box">
+            <img src="{{attributes.detail_image_c3.value}}" class="prd_img" alt="상품 이미지" />
+          </div>
+          <p class="prd_name">{{attributes.product_name_c3.value}}</p>
+          <div class="price_box">
+            <p class="retail_price">{{attributes.retail_price_c3.value}}</p>
+            <div class="current_price_box">
+              <p class="discount"></p>
+              <p class="price">{{attributes.price_c3.value}}</p>
+            </div>
+          </div>
+        </a>
       </div>
     </div>
   </div>
-</section></br>
-<!-- Tablet -->
-<section
-  class="{{infobarClass}} {{style.className}} story-card-wrapper story-card-wrapper--basic-nth story-card-wrapper--art-above-head | hide-deck hide-liveblogging box--hidden-sm box-hidden-md-only false story-card--lg flex-chain | flex"
-  id="evg-edu-sample" data-evg-campaign-id="{{campaign}}" data-evg-experience-id="{{experience}}"
-  data-evg-user-group="{{userGroup}}" aria-label="Infobar{{#if messageText}} - {{messageText}}{{/if}}" role="alert">
-  <div class="flex-chain__column flex-chain__column-single | grid__col--sm-12 grid__col--md-12 grid__col--lg-12">
-    <div data-pb-fingerprint="f0fPdtVLXxFu4n" data-pb-type="story-card/default"
-      class="story-card-container | width--100 ">
-      <div
-        class="story-card-wrapper story-card-wrapper--basic-last story-card-wrapper--art-right-of-deck | show-deck hide-livebogging box--hidden-lg box--hidden-sm  false story-card--md">
-        <div class="story-card story-card--art-right-of-deck |  flex flex--wrap">
-          <div class="story-card-block story-card-top  | grid__col--sm-12 grid__col--md-12 grid__col--lg-12">
-            <div class="story-card-component | text--overflow-ellipsis text--center box--pad-bottom-sm"><a
-                class="story-card__headline | box--margin-none text--black font--tertiary h2 text__link--color"
-                href={{articleUrl}}><span>{{articleTitle}}
-                </span></a></div>
-          </div>
-          <div class="story-card-block story-card-left | grid__col--sm-4 grid__col--md-4 grid__col--lg-4">
-            <div class="story-card-component | text--overflow-ellipsis box--pad-bottom-xs h4 text--left"><a
-                class="box--margin-none text--black font--secondary text--line-height-1.43 text__link--color box--display-block"
-                href={{articleUrl}}>
-                <div>{{articleSubTitle}}</div>
-              </a></div>
-            <div
-              class="story-card-component story-card__deck | text--grey-60 font--primary font--size-sm-14 font--size-md-14 text--line-height-1.43 text--overflow-ellipsis">
-              <span>{{articleContents}}</span>
-            </div>
-          </div>
-          <div
-            class="story-card-block story-card-right story-card-block--art | grid__col--sm-8 grid__col--md-8 grid__col--lg-8">
-            <div id="artwrapper" class="story-card-component story-card__art | box--position-relative">
-              <div class="image-wrapper | box--position-relative">
-                <figure class=" story-card__art-image | visual__image">
-                  <div class="width--100 box--margin-center">
-                    <div class="article-print-sty1 | box--position-relative width--100"
-                      style="padding-bottom: 56.1688%;">
-                      <div
-                        class="article-print-sty2 | width--100 height--100 box--position-absolute box--position-absolute-top box--position-absolute-left">
-                        <a class="" href={{articleUrl}} aria-label="Sample 4">
-                          <div class="lazyload-wrapper "><img src={{articleThumnail}} alt="Sample 4"
-                              class="box--display-block"></div>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </figure>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="story-card__separator box--bg-undefined |">
-          <div
-            class="separator | box--border box--border-grey-20 box--border-xs box--border-horizontal box--border-horizontal-bottom">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section></br>
-<!-- Mobile -->
-<section
-  class="{{infobarClass}} {{style.className}} flex-chain | flex story-card-wrapper story-card-wrapper--basic-nth story-card-wrapper--art-above-head | hide-deck hide-liveblogging box-hidden-md-only false story-card--lg"
-  id="evg-edu-sample" data-evg-campaign-id="{{campaign}}" data-evg-experience-id="{{experience}}"
-  data-evg-user-group="{{userGroup}}" aria-label="Infobar{{#if messageText}} - {{messageText}}{{/if}}" role="alert">
-  <div class="flex-chain__column flex-chain__column-single | grid__col--sm-12 grid__col--md-12 grid__col--lg-12">
-    <div data-pb-fingerprint="f0fPdtVLXxFu4n" data-pb-type="story-card/default"
-      class="story-card-container | width--100 ">
-      <div
-        class="story-card-wrapper story-card-wrapper--basic-last story-card-wrapper--art-above-head | hide-deck hide-liveblogging box--hidden-lg box--hidden-md  false story-card--sm">
-        <div class="story-card story-card--art-above-head story-card--art-100 |  flex flex--wrap ">
-          <div
-            class="story-card-block story-card-top story-card-block--art-100 | grid__col--sm-12 grid__col--md-12 grid__col--lg-12">
-            <div id="artwrapper" class="story-card-component story-card__art | box--position-relative">
-              <div class="image-wrapper | box--position-relative">
-                <figure
-                  class=" story-card__art-image | visual__image grid__col--sm-12 grid__col--md-12 grid__col--lg-12">
-                  <div class="width--100 box--margin-center">
-                    <div class="article-print-sty1 | box--position-relative width--100" style="padding-bottom: 56.25%;">
-                      <div
-                        class="article-print-sty2 | width--100 height--100 box--position-absolute box--position-absolute-top box--position-absolute-left">
-                        <a class="" href={{articleUrl}} aria-label="Sample 4">
-                          <div class="lazyload-wrapper "><img src={{articleThumnail}} alt="Sample 4"
-                              class="box--display-block"></div>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </figure>
-              </div>
-            </div>
-            <div class="story-card-component | text--overflow-ellipsis text--left box--pad-bottom-xs"><a
-                class="story-card__headline | box--margin-none text--black font--tertiary h1 text__link--color"
-                href={{articleUrl}}><span>{{articleTitle}}
-                </span></a></div>
-            <div class="story-card-component | text--overflow-ellipsis box--pad-bottom-xs h3 text--left"><a
-                class="box--margin-none text--black font--secondary text--line-height-1.43 text__link--color box--display-block"
-                href={{articleUrl}}>
-                <div>{{articleSubTitle}}</div>
-              </a></div>
-          </div>
-        </div>
-        <div class="story-card__separator box--bg-undefined |">
-          <div
-            class="separator | box--border box--border-grey-20 box--border-xs box--border-horizontal box--border-horizontal-bottom">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+</div>

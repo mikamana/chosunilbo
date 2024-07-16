@@ -1,5 +1,5 @@
 (function () {
-
+  console.log("템플릿");
   /**
    * @function setInfobarPosition
    * @param {Object} context
@@ -18,75 +18,89 @@
    * @param {Object} context
    * @description Add click listener to the "X" button that removes the template from the DOM.
    */
-  function setDismissal(context) {
-    SalesforceInteractions.cashDom(`#evg-edu-sample.${context.infobarClass} .evg-btn-dismissal`).on("click", () => {
-      SalesforceInteractions.cashDom(`#evg-edu-sample.${context.infobarClass}`).remove();
-      SalesforceInteractions.cashDom("body").css({ "margin-top": "0", "margin-bottom": "0" });
-    });
+  // function setDismissal(context) {
+  //     SalesforceInteractions.cashDom(`#evg-eventBanner.${context.infobarClass} .evg-btn-dismissal`).on("click", () => {
+  //         SalesforceInteractions.cashDom(`#evg-eventBanner.${context.infobarClass}`).remove();
+  //         SalesforceInteractions.cashDom("body").css({ "margin-top": "0", "margin-bottom": "0" });
+  //     });
+  // }
+
+  function handleTemplateContent({ context, template }) {
+    const html = template(context);
+    SalesforceInteractions.cashDom("body .special-wide > .layout--container > .heading-title:nth-child(3)").after(html);
+    // setDismissal();
   }
 
-  function apply(context, template) {
-
-    console.log("테스트 최상단");
-
-
+  function handleTriggerEvent({ context, template }) {
     if (!context.contentZone) return;
 
-
-    context.infobarClass = context.contentZone == "global_infobar_top_of_page"
-      ? "evg-infobar-top"
-      : "evg-infobar-bottom";
-
-    // if (SalesforceInteractions.cashDom(`#evg-edu-sample.${context.infobarClass}`).length > 0) return;
-
-    setInfobarPosition(context);
-    const html = template(context);
-    let htmlArr = html.split("</br>");
-    console.log(htmlArr);
-    const windowInner = window.innerWidth;
-    let device = "";
-    if (windowInner >= 1024) {
-      device = "PC"
-    } else if (windowInner >= 740 && windowInner < 1024) {
-      device = "tablet"
-    } else if (windowInner < 739) {
-      device = "mobile"
-    }
-    if (device === "PC") {
+    const { userGroup, triggerOptions, triggerOptionsNumber } = context || {};
+    console.log(context)
+    console.log(userGroup)
+    console.log(template)
+    return new Promise((resolve, reject) => {
       setTimeout(() => {
-        SalesforceInteractions.cashDom(".layout-main > .grid__container > section > article > div:nth-child(1)").html(htmlArr[0]);
+        if (userGroup !== "Control") {
+          handleTemplateContent({ context, template });
+        }
+        resolve(true);
       }, 1000);
-    } else if (device === "tablet") {
-      setTimeout(() => {
-        console.log(htmlArr[1]);
-        SalesforceInteractions.cashDom(".layout-main > .grid__container > section > article > div:nth-child(1)").html(htmlArr[1]);
-      }, 1000);
-    } else if (device === "mobile") {
-      setTimeout(() => {
+    });
+    // switch (triggerOptions.name) {
+    //     case "timeOnPage":
 
-        SalesforceInteractions.cashDom(".layout-main > .grid__container > section > article > div:nth-child(1)").html(htmlArr[2]);
-      }, 1000);
-
-    }
-    setDismissal(context);
-
-    console.log("마지막단단");
-
+    // }
   }
 
+
+  function apply(context, template) {
+    if (!context.contentZone) return;
+    if (SalesforceInteractions.cashDom(`#evg-eventBanner`).length > 0) return;
+    return handleTriggerEvent({ context, template });
+  }
+  setTimeout(() => {
+    ["prd1", "prd2", "prd3", "prd4"].forEach((prdClass) => {
+      let prdDiscount = SalesforceInteractions.cashDom("." + prdClass + " .discount");
+      let prdRetailPrice = parseInt(SalesforceInteractions.cashDom("." + prdClass + " .retail_price").text());
+      let prdPrice = parseInt(SalesforceInteractions.cashDom("." + prdClass + " .price").text());
+      let prdDiscountRate = ((prdRetailPrice - prdPrice) / prdRetailPrice) * 100;
+      prdDiscount.text(Math.floor(prdDiscountRate) + "%");
+    });
+
+    // 가격의 3번째 자리마다 콤마 삽입
+    const insertCommas = (number) => {
+      return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    };
+
+    // 각 상품에 대해 가격을 처리하고 값을 변경
+    [".prd1", ".prd2", ".prd3", ".prd4"].forEach((productClass) => {
+      let productElement = SalesforceInteractions.cashDom(productClass);
+
+      // .retail_price와 .price 모두 처리
+      let priceElements = [productElement.find(".retail_price"), productElement.find(".price")];
+
+      priceElements.forEach((priceElement) => {
+        let priceString = priceElement.text();
+        let formattedPrice = insertCommas(parseInt(priceString)) + "원";
+        priceElement.text(formattedPrice);
+      });
+    });
+  }, 1100)
   function reset(context, template) {
-    SalesforceInteractions.cashDom(`#evg-edu-sample.${context.infobarClass}`).remove();
+    SalesforceInteractions.cashDom(`#evg-eventBanner.${context.infobarClass}`).remove();
     SalesforceInteractions.cashDom("body").css({ "margin-top": "0", "margin-bottom": "0" });
   }
 
   function control(context) {
-    return new Promise(resolve => { if (context.contentZone) resolve(); });
+    return new Promise((resolve) => {
+      if (context.contentZone) resolve();
+    });
   }
 
   registerTemplate({
     apply: apply,
     reset: reset,
-    control: control
+    control: control,
   });
 
 })();
